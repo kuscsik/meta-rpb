@@ -5,6 +5,7 @@ IMAGE_FEATURES += "splash package-management debug-tweaks ssh-server-openssh hwc
 LICENSE = "MIT"
 
 inherit core-image distro_features_check extrausers
+inherit secondbuild
 
 # let's make sure we have a good image..
 REQUIRED_DISTRO_FEATURES = "wayland pam systemd"
@@ -40,3 +41,9 @@ EXTRA_USERS_PARAMS = "\
 useradd -p '' linaro; \
 usermod -a -G weston-launch linaro; \
 "
+
+
+SECOND_BUILD_IMAGE="rpb-minimal"
+SECOND_BUILD_MACHINE="hikey"
+
+addtask build_secondary before bundle_initramfs
